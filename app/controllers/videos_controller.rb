@@ -16,6 +16,7 @@ class VideosController < ApplicationController
             render json: { errors: @videos.errors.full_messages },
                    status: :unprocessable_entity
         end
+        
     end   
 
     def update

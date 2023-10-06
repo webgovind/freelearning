@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :subjects
+    resources :user_progresses 
   end
 
   resources :subjects do
@@ -15,28 +16,30 @@ Rails.application.routes.draw do
   end  
   
   resources :topics do
-   resources :videos
+   resources :videos, :notes, :doubts, :quizzes
   end   
-
-  resources :topics do
-    resources :notes
-  end   
-  
-  resources :topics do
-    resources :doubts
-  end   
-
-  resources :topics do
-    resources :quizzes
-  end 
 
   resources :quizzes do
     resources :quiz_questions
-  end  
+  end 
+
+  # resources :topics do
+  #   resources :notes
+  # end   
   
-  resources :users do 
-    resources :user_progresses 
-  end  
+  # resources :topics do
+  #   resources :doubts
+  # end   
+
+  # resources :topics do
+  #   resources :quizzes
+  # end 
+
+   
+  
+  # resources :users do 
+  #   resources :user_progresses 
+  # end  
   
 
   # post '/topics', to:'topics#create' 
