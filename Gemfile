@@ -48,3 +48,6 @@ end
 
 gem 'jwt' 
 
+gem 'rails-erd', group: :development
+
+
