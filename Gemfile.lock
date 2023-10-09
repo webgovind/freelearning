@@ -167,6 +167,9 @@ GEM
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    validate_email (0.1.6)
+      activemodel (>= 3.0)
+      mail (>= 2.2.5)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -185,6 +188,7 @@ DEPENDENCIES
   rails-erd
   sqlite3 (~> 1.4)
   tzinfo-data
+  validate_email
 
 RUBY VERSION
    ruby 3.2.2p53

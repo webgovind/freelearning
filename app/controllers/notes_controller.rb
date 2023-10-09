@@ -4,17 +4,17 @@ class NotesController < ApplicationController
   
     def index
         # debugger
-        @notes = Topic.find_by!(id: params[:topic_id]).notes.all
-        render json:@notes, status: :ok
+        @note = Topic.find_by!(id: params[:topic_id]).note
+        render json:@note, status: :ok
     end
 
     def create
         # debugger
-        @note = Topic.find_by!(id: params[:topic_id]).notes.new(note_params)
+        @note = Topic.find_by!(id: params[:topic_id]).build_note(note_params)
         if @note.save
             render json: @note, status: :created
         else
-            render json: { errors: @notes.errors.full_messages },
+            render json: { errors: @note.errors.full_messages },
                    status: :unprocessable_entity
         end
     end   
@@ -40,12 +40,12 @@ class NotesController < ApplicationController
 
     private
 
-    #callbacks
+ 
     def find_note
         # debugger
-        @note = Topic.find_by!(id: params[:topic_id]).notes.find(params[:id])
-        # @subject = User.find_by!(id: params[:user_id]).subjects.find(params[:id]) 
-    end
+        @note = Topic.find_by!(id: params[:topic_id]).note
+    end    
+    
 
     #params
     def note_params

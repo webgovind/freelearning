@@ -50,4 +50,5 @@ gem 'jwt'
 
 gem 'rails-erd', group: :development
 
+gem 'validate_email'
 

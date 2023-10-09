@@ -20,7 +20,7 @@ class SubjectsController < ApplicationController
     end
 
     def update
-        unless @subject.update(user_params)  
+        unless @subject.update(subject_params)  
             render json: { errors: @subject.errors.full_messages },
                    status: :unprocessable_entity
         else
@@ -40,20 +40,17 @@ class SubjectsController < ApplicationController
 
     private
 
-    #callbacks
+  
     def find_subject  
         # debugger
         @subject = User.find_by!(id: params[:user_id]).subjects.find(params[:id])
        
     end
 
-    #params
+    #params for update
     def subject_params
         params.permit(:name)
     end
 
-    #params for update 
-    def user_params
-        params.permit(:name)
-    end    
+       
 end

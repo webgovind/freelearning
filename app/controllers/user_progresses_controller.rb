@@ -3,18 +3,18 @@ class UserProgressesController < ApplicationController
     before_action :find_user_progress, only: [:update,:show,:destroy]
   
     def index
-        @user_progresses = User.find_by!(id: params[:user_id]).user_progresses.all
-        render json:@user_progresses, status: :ok
+        @user_progress = User.find_by!(id: params[:user_id]).user_progress
+        render json:@user_progress, status: :ok
     end
 
     def create
         # debugger
-        @user_progress = User.find_by!(id: params[:user_id]).user_progresses.new(user_progress_params)
-        
+        # @user_progress = User.find_by(id: params[:user_id]).user_progress.new(user_progress_params)
+        @user_progress = User.find_by(id: params[:user_id]).build_user_progress(user_progress_params)
         if @user_progress.save
             render json: @user_progress, status: :created
         else
-            render json: { errors: @user_progresses.errors.full_messages },
+            render json: { errors: @user_progress.errors.full_messages },
                    status: :unprocessable_entity
         end
     end
@@ -43,7 +43,7 @@ class UserProgressesController < ApplicationController
     #callbacks
     def find_user_progress
         # debugger
-        @user_progress = User.find_by!(id: params[:user_id]).user_progresses.find(params[:id])
+        @user_progress = User.find_by!(id: params[:user_id]).user_progress
        
     end
 

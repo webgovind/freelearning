@@ -3,20 +3,19 @@ class VideosController < ApplicationController
     before_action :find_video, only: [:update,:show,:destroy]
   
     def index
-        @videos = Topic.find_by!(id: params[:topic_id]).videos.all
-        render json:@videos, status: :ok
+        @video = Topic.find_by!(id: params[:topic_id]).video
+        render json:@video, status: :ok
     end
 
     def create
         # debugger
-        @video = Topic.find_by!(id: params[:topic_id]).videos.new(video_params)
+        @video = Topic.find_by(id: params[:topic_id]).build_video(video_params)
         if @video.save
             render json: @video, status: :created
         else
-            render json: { errors: @videos.errors.full_messages },
+            render json: { errors: @video.errors.full_messages },
                    status: :unprocessable_entity
         end
-        
     end   
 
     def update
@@ -40,11 +39,9 @@ class VideosController < ApplicationController
 
     private
 
-    #callbacks
     def find_video
         # debugger
-        @video = Topic.find_by!(id: params[:topic_id]).videos.find(params[:id])
-        # @subject = User.find_by!(id: params[:user_id]).subjects.find(params[:id]) 
+        @video = Topic.find_by!(id: params[:topic_id]).video
     end
 
     #params
